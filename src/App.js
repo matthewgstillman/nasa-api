@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [coords, setCoords] = useState({ lat: 40.7608, lng: -111.891 });
+  const [date, setDate] = useState(
+    `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
+  );
+
+  let url = `https://api.nasa.gov/planetary/earth/imagery?lon=${lng}&lat=${lat}&date=${date}&api_key=${process.env.REACT_APP_API_KEY}`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>NASA API</h1>
     </div>
   );
-}
+};
 
 export default App;
